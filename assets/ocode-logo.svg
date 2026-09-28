@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="OCode">
+  <rect width="120" height="120" rx="28" fill="#f7f7f7"/>
+  <g transform="translate(20 20) scale(3.3333)">
+    <path d="M18.6 6.1A8.4 8.4 0 0 0 5.2 16.2M5.4 17.9a8.4 8.4 0 0 0 13.4-10.1"
+          stroke="#101318" stroke-width="4" stroke-linecap="butt" fill="none"/>
+  </g>
+</svg>
