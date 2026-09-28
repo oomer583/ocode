@@ -32,7 +32,7 @@ const getBase = (): Configuration => ({
     output: "dist",
     buildResources: "resources",
   },
-  files: ["out/**/*", "resources/**/*"],
+  files: ["out/**/*", "!out/**/*.map", "resources/**/*"],
   extraResources: [
     {
       from: "native/",

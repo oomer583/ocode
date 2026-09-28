@@ -86,7 +86,7 @@ export default defineConfig({
       "import.meta.env.VITE_OPENCODE_CHANNEL": JSON.stringify(channel),
     },
     build: {
-      sourcemap: true,
+      sourcemap: !!sentry,
       rollupOptions: {
         input: {
           main: "src/renderer/index.html",

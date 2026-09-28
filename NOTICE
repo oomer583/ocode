@@ -1,116 +1,21 @@
-import { execFile } from "node:child_process"
-import path from "node:path"
-import { fileURLToPath } from "node:url"
-import { promisify } from "node:util"
+OCode
+Copyright (c) 2026 omer311 (https://github.com/oomer583)
 
-import type { Configuration } from "electron-builder"
+This product is built on opencode, which is licensed under the MIT License.
+The upstream copyright notice and license text are kept unchanged in LICENSE,
+and apply to all upstream code in this repository.
 
-const execFileAsync = promisify(execFile)
-const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
-const signScript = path.join(rootDir, "script", "sign-windows.ps1")
+Original contributions of the OCode project, including but not limited to:
 
-async function signWindows(configuration: { path: string }) {
-  if (process.platform !== "win32") return
-  if (process.env.GITHUB_ACTIONS !== "true") return
+  - the name "OCode", the OCode logo and all related branding
+  - assets/ocode-logo.svg
+  - packages/app/src/components/project-drawer.tsx
+  - the OCode-specific code written into packages/desktop/src/main,
+    packages/app and packages/ui
 
-  await execFileAsync(
-    "pwsh",
-    ["-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", signScript, configuration.path],
-    { cwd: rootDir },
-  )
-}
+are Copyright (c) 2026 omer311. Where those contributions modify upstream
+files, the upstream portions remain under the MIT License and the original
+contributions within them remain the copyright of their author.
 
-const channel = (() => {
-  const raw = process.env.OPENCODE_CHANNEL
-  if (raw === "dev" || raw === "beta" || raw === "prod") return raw
-  return "dev"
-})()
-
-const getBase = (): Configuration => ({
-  artifactName: "opencode-desktop-${os}-${arch}.${ext}",
-  directories: {
-    output: "dist",
-    buildResources: "resources",
-  },
-  files: ["out/**/*", "!out/**/*.map", "resources/**/*"],
-  extraResources: [
-    {
-      from: "native/",
-      to: "native/",
-      filter: ["index.js", "index.d.ts", "build/Release/mac_window.node", "swift-build/**"],
-    },
-  ],
-  mac: {
-    category: "public.app-category.developer-tools",
-    icon: `resources/icons/icon.icns`,
-    hardenedRuntime: true,
-    gatekeeperAssess: false,
-    entitlements: "resources/entitlements.plist",
-    entitlementsInherit: "resources/entitlements.plist",
-    notarize: true,
-    target: ["dmg", "zip"],
-  },
-  dmg: {
-    sign: true,
-  },
-  protocols: {
-    name: "OpenCode",
-    schemes: ["opencode"],
-  },
-  win: {
-    icon: `resources/icons/icon.ico`,
-    signtoolOptions: {
-      sign: signWindows,
-    },
-    target: ["nsis"],
-    verifyUpdateCodeSignature: false,
-  },
-  nsis: {
-    oneClick: true,
-    perMachine: false,
-    installerIcon: `resources/icons/icon.ico`,
-    installerHeaderIcon: `resources/icons/icon.ico`,
-  },
-  linux: {
-    icon: `resources/icons`,
-    category: "Development",
-    target: ["AppImage", "deb", "rpm"],
-  },
-})
-
-function getConfig() {
-  const base = getBase()
-
-  switch (channel) {
-    case "dev": {
-      return {
-        ...base,
-        appId: "com.ocode.desktop",
-        productName: "OCode",
-        rpm: { packageName: "opencode-dev" },
-      }
-    }
-    case "beta": {
-      return {
-        ...base,
-        appId: "com.ocode.desktop",
-        productName: "OCode",
-        protocols: { name: "OpenCode Beta", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode-beta", channel: "latest" },
-        rpm: { packageName: "opencode-beta" },
-      }
-    }
-    case "prod": {
-      return {
-        ...base,
-        appId: "com.ocode.desktop",
-        productName: "OCode",
-        protocols: { name: "OpenCode", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode", channel: "latest" },
-        rpm: { packageName: "opencode" },
-      }
-    }
-  }
-}
-
-export default getConfig()
+The MIT License is a copyright license. It does not grant trademark rights.
+The name "OCode" and the OCode logo are not licensed for use by others.
