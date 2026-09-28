@@ -14,7 +14,7 @@ A desktop coding agent that runs on your own model key.
 
 ## What it is
 
-OCode opens a project folder and puts an agent inside it. You describe what you want; it reads, writes and runs code in that folder. It is a desktop application built on top of [opencode](https://github.com/sst/opencode) (MIT), with its own shell, interface and project workflow.
+OCode opens a project folder and puts an agent inside it. You describe what you want; it reads, writes and runs code in that folder. It is a desktop application built on top of [opencode](https://github.com/anomalyco/opencode) (MIT), with its own shell, interface and project workflow.
 
 ## Why it exists
 
@@ -63,11 +63,11 @@ bun typecheck
 
 ## Credits
 
-OCode is a fork of [opencode](https://github.com/sst/opencode), used under the MIT License. The upstream license is kept in [LICENSE](LICENSE).
+OCode is a fork of [opencode](https://github.com/anomalyco/opencode), used under the MIT License. The upstream license is kept in [LICENSE](LICENSE).
 
 ## License
 
-OCode is built on [opencode](https://github.com/sst/opencode), which is licensed
+OCode is built on [opencode](https://github.com/anomalyco/opencode), which is licensed
 under the MIT License. The upstream license is kept unchanged in [LICENSE](LICENSE)
 and applies to all upstream code in this repository.
 

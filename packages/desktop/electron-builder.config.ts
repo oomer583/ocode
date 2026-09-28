@@ -96,7 +96,7 @@ function getConfig() {
         appId: "com.ocode.desktop",
         productName: "OCode",
         protocols: { name: "OpenCode Beta", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode-beta", channel: "latest" },
+        publish: { provider: "github", owner: "oomer583", repo: "ocode", channel: "latest" },
         rpm: { packageName: "opencode-beta" },
       }
     }
@@ -106,7 +106,7 @@ function getConfig() {
         appId: "com.ocode.desktop",
         productName: "OCode",
         protocols: { name: "OpenCode", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode", channel: "latest" },
+        publish: { provider: "github", owner: "oomer583", repo: "ocode", channel: "latest" },
         rpm: { packageName: "opencode" },
       }
     }

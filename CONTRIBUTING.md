@@ -18,7 +18,7 @@ app version and your operating system help.
 
 ## Upstream
 
-Most of the code here comes from [opencode](https://github.com/sst/opencode) and
+Most of the code here comes from [opencode](https://github.com/anomalyco/opencode) and
 is MIT licensed. If your change belongs there rather than in OCode, send it to
 them instead. It will reach far more people.
 
