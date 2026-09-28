@@ -67,4 +67,9 @@ OCode is a fork of [opencode](https://github.com/sst/opencode), used under the M
 
 ## License
 
-MIT
+OCode is built on [opencode](https://github.com/sst/opencode), which is licensed
+under the MIT License. The upstream license is kept unchanged in [LICENSE](LICENSE)
+and applies to all upstream code in this repository.
+
+The original contributions of this project, including the OCode name and logo, are
+covered separately. See [NOTICE](NOTICE).
