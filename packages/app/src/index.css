@@ -1,0 +1,297 @@
+@import "@opencode-ai/ui/styles/tailwind";
+
+@font-face {
+  font-family: "JetBrainsMono Nerd Font Mono";
+  src: url("/assets/JetBrainsMonoNerdFontMono-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer components {
+  @keyframes session-progress-whip {
+    0% {
+      clip-path: inset(0 100% 0 0 round 999px);
+      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    48% {
+      clip-path: inset(0 0 0 0 round 999px);
+      animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    100% {
+      clip-path: inset(0 0 0 100% round 999px);
+    }
+  }
+
+  [data-component="session-progress"] {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 220ms ease-out;
+  }
+
+  [data-component="session-progress"][data-state="hiding"] {
+    opacity: 0;
+  }
+
+  [data-component="session-progress-bar"] {
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--session-progress-color);
+    clip-path: inset(0 100% 0 0 round 999px);
+    animation: session-progress-whip var(--session-progress-ms, 1800ms) infinite;
+    will-change: clip-path;
+  }
+
+  [data-component="getting-started"] {
+    container-type: inline-size;
+    container-name: getting-started;
+  }
+
+  [data-component="getting-started-actions"] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* gap-3 */
+  }
+
+  [data-component="getting-started-actions"] > [data-component="button"] {
+    width: 100%;
+  }
+
+  @container getting-started (min-width: 17rem) {
+    [data-component="getting-started-actions"] {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    [data-component="getting-started-actions"] > [data-component="button"] {
+      width: auto;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------
+
+   OCode: ozel bilesen stilleri.
+
+   Kaynak .css dosyasi sourcemap'te tasinmiyordu; bu kurallar
+   uygulamanin derlenmis styles.css'inden birebir geri cikarildi.
+
+   --------------------------------------------------------------- */
+
+@layer components {
+  .ocode-loader-shell {
+      background: #f7f7f7;
+      border-radius: 18px;
+      justify-content: center;
+      align-items: center;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      box-shadow: 0 0 0 1px #ffffff14, 0 18px 50px #00000038;
+    }
+
+  .ocode-loader-mark {
+      color: #101318;
+      width: 42px;
+      height: 42px;
+      animation: 1.15s linear infinite ocode-loader-spin;
+    }
+
+  .ocode-editor-scroll {
+      background: linear-gradient(var(--background-stronger), var(--background-stronger)) padding-box, linear-gradient(90deg, transparent, var(--border-weaker-base), transparent) border-box;
+    }
+
+  .ocode-editor-surface {
+      --ocode-editor-fg: #d4d4d8;
+      --ocode-syntax-comment: #747b86;
+      --ocode-syntax-string: #9ecb9a;
+      --ocode-syntax-constant: #d7ba7d;
+      --ocode-syntax-keyword: #c586c0;
+      --ocode-syntax-operator: #9aa0aa;
+      --ocode-syntax-function: #dcdcaa;
+      --ocode-syntax-type: #6cb6d8;
+      --ocode-syntax-variable: #d4d4d8;
+      --ocode-syntax-property: #9cdcfe;
+      --syntax-comment: var(--ocode-syntax-comment);
+      --syntax-string: var(--ocode-syntax-string);
+      --syntax-constant: var(--ocode-syntax-constant);
+      --syntax-keyword: var(--ocode-syntax-keyword);
+      --syntax-operator: var(--ocode-syntax-operator);
+      --syntax-primitive: var(--ocode-syntax-function);
+      --syntax-type: var(--ocode-syntax-type);
+      --syntax-variable: var(--ocode-syntax-variable);
+      --syntax-property: var(--ocode-syntax-property);
+      --syntax-punctuation: var(--ocode-syntax-operator);
+      --syntax-object: var(--ocode-syntax-variable);
+      background: var(--background-stronger);
+    }
+
+  .ocode-code-view {
+      min-height: 100%;
+      color: var(--ocode-editor-fg);
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+  .ocode-code-view [data-component="file"] {
+      min-height: 100%;
+    }
+
+  .ocode-code-view diffs-container {
+      min-height: 100%;
+      display: block;
+    }
+
+  .ocode-edit-input {
+      caret-color: #f4f4f5;
+      color: #0000;
+      tab-size: 2;
+      -webkit-text-fill-color: transparent;
+      line-height: 20px;
+      overflow: hidden;
+    }
+
+  .ocode-edit-input::selection {
+      background: var(--primary-base);
+    }
+
+  .ocode-edit-input::selection {
+      -webkit-text-fill-color: transparent;
+    }
+
+  .ocode-edit-highlight {
+      color: var(--ocode-editor-fg);
+      font-family: var(--font-family-mono);
+      font-feature-settings: var(--font-family-mono--font-feature-settings);
+      tab-size: 2;
+      white-space: pre-wrap;
+      word-break: normal;
+      min-height: calc(100% - 36px);
+      margin: 0;
+      font-size: 13px;
+      line-height: 20px;
+      overflow: hidden;
+    }
+
+  .ocode-edit-highlight .shiki {
+      color: var(--ocode-editor-fg);
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      white-space: pre-wrap;
+      margin: 0;
+      overflow: visible;
+      background: none !important;
+    }
+
+  .ocode-edit-highlight code {
+      font-family: inherit;
+      display: block;
+    }
+
+  .ocode-chat-scroll .scroll-view__thumb:after {
+      background-color: var(--border-weak-base);
+      width: 3px;
+    }
+
+  #terminal-panel .ocode-terminal-surface, #terminal-panel .ocode-terminal-surface * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-weak-base) transparent;
+    }
+
+  #terminal-panel .ocode-terminal-surface ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+  #terminal-panel .ocode-terminal-surface ::-webkit-scrollbar-thumb {
+      background-color: var(--border-weak-base);
+      border: 2px solid #0000;
+      border-radius: 999px;
+    }
+
+  #terminal-panel .ocode-terminal-surface ::-webkit-scrollbar-thumb {
+      background-clip: content-box;
+    }
+
+  #terminal-panel .ocode-terminal-surface ::-webkit-scrollbar-track {
+      background: none;
+    }
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .ocode-editor-scroll {
+      background: linear-gradient(var(--background-stronger), var(--background-stronger)) padding-box, linear-gradient(90deg, transparent, color-mix(in srgb, var(--border-weaker-base) 70%, transparent), transparent) border-box;
+  }
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .ocode-edit-input::selection {
+      background: color-mix(in srgb, var(--primary-base) 28%, transparent);
+  }
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .ocode-chat-scroll .scroll-view__thumb:after {
+      background-color: color-mix(in srgb, var(--border-weak-base) 72%, transparent);
+  }
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  #terminal-panel .ocode-terminal-surface, #terminal-panel .ocode-terminal-surface * {
+      scrollbar-color: color-mix(in srgb, var(--border-weak-base) 70%, transparent) transparent;
+  }
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  #terminal-panel .ocode-terminal-surface ::-webkit-scrollbar-thumb {
+      background-color: color-mix(in srgb, var(--border-weak-base) 72%, transparent);
+  }
+}
+
+.ocode-loader-shell {
+  align-items: center;
+  background: #f7f7f7;
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 18px 50px rgba(0, 0, 0, 0.22);
+  display: flex;
+  height: 64px;
+  justify-content: center;
+  width: 64px;
+  }
+
+.ocode-loader-mark {
+  animation: ocode-loader-spin 1.15s linear infinite;
+  color: #101318;
+  height: 42px;
+  width: 42px;
+  }
+
+@keyframes ocode-loader-spin {
+    to {
+      transform: rotate(360deg);
+    }
+}
+
+@keyframes ocode-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
